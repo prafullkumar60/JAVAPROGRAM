@@ -1,81 +1,43 @@
+package tcs;
+
 import java.util.Scanner;
-class Document {
-	private int id;
-	private String title;
-	private String folderName;
-	private int pages;
-	public Document(int id, String title, String folderName, int pages) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.folderName = folderName;
-		this.pages = pages;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getFolderName() {
-		return folderName;
-	}
-	public void setFolderName(String folderName) {
-		this.folderName = folderName;
-	}
-	public int getPages() {
-		return pages;
-	}
-	public void setPages(int pages) {
-		this.pages = pages;
-	}
-}
 
 public class Solution8 {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
-		Document[] document=new Document[4];
-		for(int i=0;i<document.length;i++)
+		Book[] books=new Book[4];
+		for(int i=0;i<books.length;i++)
 		{
 			int id=sc.nextInt();sc.nextLine();
 			String title=sc.nextLine();
-			String folderName=sc.nextLine();
-			int pages=sc.nextInt();
-			document[i]=new Document(id,title,folderName,pages);
+			String author=sc.nextLine();
+			double price=sc.nextDouble();
+			books[i]=new Book(id,title,author,price);
 		}
-		Document[] output=docsWithOddPages(document);
-		for(int i=0;i<output.length;i++)
+		Book[] output=sortBooksByPrice(books);
+		for(Book result:output)
 		{
-			System.out.println(output[i].getId()+" "+output[i].getTitle()+" "+output[i].getFolderName()+" "+output[i].getPages());
+			System.out.println(result.getId()+" "+result.getTitle()+" "+result.getAuthor()+" "+result.getPrice());
 		}
 
 	}
-	public static Document[] docsWithOddPages(Document[] document)
+	public static Book[] sortBooksByPrice(Book[] books)
 	{
-		int count=0;
-		for(int i=0;i<document.length;i++)
+//		Book[] temp=new Book[4];
+		for(int i=books.length-1;i>0;i--)
 		{
-			if(document[i].getPages()%2!=0)
-				count++;
-		}
-		Document[] temp=new Document[count];
-		int k=0;
-		for(int i=0;i<document.length;i++)
-		{
-			if(document[i].getPages()%2!=0)
+			for(int j=0;j<i;j++)
 			{
-				temp[k++]=document[i];
-			}	
+				if(books[j].getPrice()>books[j+1].getPrice())
+				{
+					Book temp1=books[j];
+					books[j]=books[j+1];
+					books[j+1]=temp1;
+				}
+			}
 		}
-		return temp;
+		return books;
 	}
+
 }
-
-
