@@ -1,32 +1,12 @@
 #include<stdio.h>
-
+#include<string.h>
 int main()
-
 {
-	
-	char str[100],*ptr,**ptr1;
-
-	int length=0;
-	
-	printf("Enter string to find length\n");
-	
-	scanf("%s",str);
-	
-	printf("Given string is:%s\n",str);
-	
-	ptr=str;
-
-	ptr1=&ptr;
-	
-	while(**ptr1!='\0')
-
-	{
-
-	    ptr++;
-
-	    length++;
-
-	}
-	printf("Length of the string is:%d",length);
-
+        char str[50];
+        int i=0;
+        printf("Enter string to find length\n");
+        fgets(str,sizeof(str),stdin);
+        while(str[i++]!='\0');
+        printf("Length of the string is:%d\n",i-1);
+        printf("Length of the string is:%ld\n",strlen(str));
 }
